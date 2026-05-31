@@ -1,0 +1,325 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Stats from "../components/Stats.astro";
+import { site } from "../data/site.config";
+
+const stats = [
+  { value: "1990", label: "Founded at the Crossroads", icon: "📅" },
+  { value: "1,745", suffix: " Ft", label: "Finch Hill Peak Elevation", icon: "🏔️" },
+  { value: "30+", suffix: " Yrs", label: "Family-Owned Vibe", icon: "🤝" },
+  { value: "100", suffix: "%", label: "Homemade & Delicious", icon: "⭐" },
+];
+
+const milestones = [
+  {
+    year: "1980s – 1990",
+    title: "The Tastee Freeze Beginnings",
+    description: "William F. 'Billy' Farber Sr. establishes the restaurant at the Route 247 crossroads as his first commercial venture. Serving cold treats and diner basics, it quickly becomes a summer landmark."
+  },
+  {
+    year: "2000s",
+    title: "Becoming a Community Anchor",
+    description: "Even as Billy's career expands into banking leadership, the diner remains a family-owned bedrock. Locals and vacationers headed to Crystal Lake make it a mandatory stop."
+  },
+  {
+    year: "Today",
+    title: "Over 30 Years of Tradition",
+    description: "Continuing as a family-friendly institution, Finch Hill stands proud, serving the same huge portions, cheap prices, and homemade recipes that started it all."
+  }
+];
+---
+
+<BaseLayout
+  title="Our Story"
+  description={`Learn the history of ${site.name} — from the geographic Finch Hill peak to the legacy of our founder, Billy Farber.`}
+>
+  <section class="section about-header">
+    <div class="container-narrow">
+      <p class="eyebrow">Our Story</p>
+      <h1>A Crossroads Landmark</h1>
+      <p class="lead">
+        For over three decades, Finch Hill Restaurant & Dairy Bar has stood at the crossroads of Route 247, serving as a warm, welcoming beacon for locals and travelers alike.
+      </p>
+    </div>
+  </section>
+
+  <!-- History & Legacy Grid -->
+  <section class="section history-section text-content">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-text">
+          <h2>The Legacy of Billy Farber</h2>
+          <p>
+            Before he was a prominent regional business leader—serving as Chairman, President, and CEO of CommBancorp Inc. and Community Bank in the Carbondale area—William F. "Billy" Farber Sr. (1937–2016) was a young entrepreneur with a simple dream. He wanted to build a place that brought people together.
+          </p>
+          <p>
+            In the late 1980s, Billy founded the diner as <strong>Finch Hill Restaurant and Tastee Freeze</strong>. Located at the intersection connecting Carbondale, Dundaff, and Crystal Lake, it was his very first restaurant venture. 
+          </p>
+          <p>
+            Billy poured himself into the business. He believed in providing incredibly high-quality homemade food, serving massive portions, and keeping prices affordable for working-class families. But above all, he got to know his customers. He listened to their stories, celebrated their milestones, and built a foundation of trust—a quality he carried through his entire legendary career.
+          </p>
+          <p>
+            Today, that same spirit lives on. We continue to welcome every guest like a member of our own family, preparing every tender, burger, and bowl of pasta with care.
+          </p>
+        </div>
+        <div class="story-image-placeholder">
+          <div class="heritage-badge-box">
+            <div class="badge-ring">
+              <span class="badge-year">Est.</span>
+              <span class="badge-num">1990</span>
+            </div>
+            <h3>A Local Institution</h3>
+            <p>Our kitchen has been serving the communities of Greenfield Township, Carbondale, Crystal Lake, and Spencers Corners for over thirty years.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Stats stats={stats} columns={4} />
+
+  <!-- Geographic Peak Section -->
+  <section class="section geographic-section">
+    <div class="container">
+      <div class="geo-grid">
+        <div class="geo-visual">
+          <div class="map-placeholder">
+            <span class="map-marker">📍</span>
+            <div class="map-text">
+              <strong>Greenfield Township, PA</strong>
+              <p>N41.61897° W75.55769°</p>
+            </div>
+          </div>
+        </div>
+        <div class="geo-content">
+          <p class="eyebrow">The Geography</p>
+          <h2>High in the Endless Mountains</h2>
+          <p>
+            Our restaurant takes its name from the majestic <strong>Finch Hill</strong>, a high topographic mountain peak rising 1,745 feet above sea level in Greenfield Township, Lackawanna County, PA.
+          </p>
+          <p>
+            Sits in a scenic rural crossroads along PA Route 247, the "Finch Hill area" represents the breathtaking gateway between the historic valley of Carbondale, the sparkling waters of Crystal Lake, and the tranquil beauty of the Endless Mountains.
+          </p>
+          <p>
+            Over the years, we've become a favorite checkpoint for hikers, campers, and summer travelers seeking a satisfying meal in the fresh mountain air. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="section timeline-section section-alt">
+    <div class="container-narrow">
+      <h2 class="text-center">Milestones Along the Way</h2>
+      <div class="timeline">
+        {milestones.map((m) => (
+          <div class="timeline-item">
+            <div class="timeline-year">{m.year}</div>
+            <div class="timeline-content">
+              <h3>{m.title}</h3>
+              <p>{m.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .text-center { text-align: center; }
+  .eyebrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-3);
+  }
+  .about-header {
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .about-header h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+  }
+  .lead {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    line-height: var(--leading-snug);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Grid Layouts */
+  .story-grid,
+  .geo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  @media (min-width: 880px) {
+    .story-grid,
+    .geo-grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .geo-grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+
+  .story-text h2,
+  .geo-content h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+  }
+  .story-text p,
+  .geo-content p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  .story-image-placeholder {
+    display: flex;
+    justify-content: center;
+  }
+  .heritage-badge-box {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    padding: var(--space-12) var(--space-8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+  }
+  .badge-ring {
+    width: 100px;
+    height: 100px;
+    border: 3px double var(--color-accent);
+    border-radius: var(--radius-full);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--space-6);
+  }
+  .badge-year {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+  .badge-num {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+  }
+  .heritage-badge-box h3 {
+    margin-bottom: var(--space-3);
+  }
+  .heritage-badge-box p {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: var(--leading-normal);
+  }
+
+  /* Geographic / Map Vibe */
+  .geo-visual {
+    display: flex;
+    justify-content: center;
+  }
+  .map-placeholder {
+    background: #f1eddf;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12) var(--space-8);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    overflow: hidden;
+    background-image: radial-gradient(#d3cbb3 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .map-marker {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--space-4);
+    animation: bounce 2s infinite ease-in-out;
+  }
+  .map-text strong {
+    color: var(--color-primary-dark);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+  .map-text p {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: var(--space-8);
+    margin-top: var(--space-12);
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 11px;
+    width: 2px;
+    background: var(--color-primary-light);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--space-8);
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-year {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--color-accent-dark);
+    background: var(--color-bg-alt);
+    position: absolute;
+    left: calc(-1 * var(--space-8));
+    padding-block: var(--space-1);
+    transform: translateX(-10px);
+    display: inline-block;
+    z-index: 5;
+    border-radius: var(--radius-sm);
+  }
+  .timeline-content {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+    margin-left: var(--space-12);
+  }
+  .timeline-content h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .timeline-content p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+</style>

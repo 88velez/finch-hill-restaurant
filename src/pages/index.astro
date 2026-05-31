@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ComingSoon from "../components/ComingSoon.astro";
+import Hero from "../components/Hero.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+import Testimonials from "../components/Testimonials.astro";
+import FAQ from "../components/FAQ.astro";
+import CTABanner from "../components/CTABanner.astro";
+import Stats from "../components/Stats.astro";
+import { site } from "../data/site.config";
+
+// Check coming soon mode
+const comingSoon = site.comingSoon?.enabled ?? false;
+
+const features = [
+  { 
+    title: "Home-Breaded Chicken Tenders", 
+    description: "Our signature dish! Fresh chicken breast hand-cut daily, double-breaded in-house for a satisfying crunch. Served with crispy fries.", 
+    icon: "🍗" 
+  },
+  { 
+    title: "Linguine & Hand-Rolled Meatballs", 
+    description: "A colossal portion of tender linguine pasta smothered in slow-cooked marinara and topped with massive hand-rolled Italian meatballs.", 
+    icon: "🍝" 
+  },
+  { 
+    title: "Famous Summer Dairy Bar", 
+    description: "Our seasonal walk-up window. Cool off with towering chocolate-vanilla twists, premium hard-scoop ice cream, and thick coffee milkshakes.", 
+    icon: "🍦" 
+  },
+];
+
+const testimonials = [
+  { 
+    quote: "I've been coming here with my family since the 90s after swimming at Crystal Lake. The chicken tenders are out of this world, and the coffee milkshake is a Pennsylvania masterpiece. Unbeatable prices!", 
+    author: "The Miller Family", 
+    role: "Regular Customers", 
+    rating: 5 
+  },
+  { 
+    quote: "A true diamond in the rough. Massive portions, very cheap prices, and fast, friendly service. It's a classic American diner through and through. Just remember it's cash only!", 
+    author: "Mark T.", 
+    role: "Local Guide", 
+    rating: 5 
+  },
+  { 
+    quote: "We ordered the Chicken Francaise and the Linguine with Meatballs. Everything tasted completely homemade, fresh, and exceptionally tender. The crossroads setting near the mountains is gorgeous.", 
+    author: "Sophia R.", 
+    role: "Returning Dinner Guest", 
+    rating: 5 
+  },
+];
+
+const faqs = [
+  { 
+    question: "Do you accept credit cards?", 
+    answer: "No, Finch Hill is a traditional cash-only diner. We do this to keep our food prices as low as possible for our customers!" 
+  },
+  { 
+    question: "When does dinner start?", 
+    answer: "Our separate, premium Italian dinner favorites (like Chicken Francaise and homemade marinara pasta) start daily at 4:00 PM. Breakfast and classic diner comfort foods are served all day." 
+  },
+  { 
+    question: "Is the Dairy Bar open year-round?", 
+    answer: "Our main restaurant dining room and takeout counter are open year-round! Our outdoor, walk-up Dairy Bar window opens seasonally in the summer for that classic summer ice cream experience." 
+  },
+];
+
+const stats = [
+  { value: "1,745", suffix: " Ft", label: "Finch Hill Peak Elevation", icon: "🏔️" },
+  { value: "30+", suffix: " Yrs", label: "Crossroads Tradition", icon: "🗓️" },
+  { value: "100", suffix: "%", label: "Homemade Quality", icon: "❤️" },
+  { value: "Cash", label: "Only", icon: "💵" },
+];
+---
+
+{comingSoon && (
+  <BaseLayout hideCookieConsent hideBackToTop>
+    <ComingSoon
+      heading={site.comingSoon.heading}
+      message={site.comingSoon.message}
+      launchDate={site.comingSoon.launchDate}
+    />
+  </BaseLayout>
+)}
+{!comingSoon && (
+  <BaseLayout>
+    <Hero
+      eyebrow={site.tagline}
+      title="A Local Crossroads Tradition at Finch Hill."
+      description="Nestled near the peak of Greenfield Township along Route 247, we serve hearty, homemade American diner comforts, classic Italian dinners, and sweet summer ice cream twists."
+      primaryCta={{ label: "View Our Menu", href: "/menu" }}
+      secondaryCta={{ label: "Our Story", href: "/about" }}
+      image="/images/finch_1.jpg"
+      imageAlt="Finch Hill Restaurant and Dairy Bar crossroads"
+    />
+
+    <!-- Crossroads History Brief Section -->
+    <section class="section heritage-section">
+      <div class="container">
+        <div class="heritage-grid">
+          <div class="heritage-content">
+            <p class="eyebrow">Greenfield Township, PA</p>
+            <h2>At the Crossroads of the Endless Mountains</h2>
+            <p class="lead text-dark">
+              Located directly along PA Route 247, the crossroads between Carbondale, Crystal Lake, and Dundaff has been a welcoming landmark for generations.
+            </p>
+            <p>
+              Originally founded as a cozy Tastee Freeze by local businessman William F. "Billy" Farber Sr., Finch Hill Restaurant has grown into a 30+ year local institution. Before his successful career as a banking executive, Billy poured his heart into this restaurant, establishing a philosophy of giant portions, cheap prices, and getting to know every single customer by name.
+            </p>
+            <div class="quick-callout">
+              <p>
+                🌲 <strong>Scenic Stop:</strong> Heading to the lake or driving through the Poconos? We are the perfect pitstop for a piping-hot breakfast, a crisp fish basket, or a sweet walk-up soft serve twist.
+              </p>
+            </div>
+          </div>
+          <div class="heritage-visual">
+            <div class="heritage-card">
+              <h3>Dine-In & Takeout</h3>
+              <ul class="diner-features">
+                <li>
+                  <span class="feat-icon">🍳</span>
+                  <div>
+                    <strong>Breakfast Staples:</strong> Fresh eggs, stacked pancakes, and home fries served early.
+                  </div>
+                </li>
+                <li>
+                  <span class="feat-icon">🍗</span>
+                  <div>
+                    <strong>Hand-Breaded Tenders:</strong> Massive, cut in-house daily, and fried to gold perfection.
+                  </div>
+                </li>
+                <li>
+                  <span class="feat-icon">🍝</span>
+                  <div>
+                    <strong>Italian Dinners (4 PM):</strong> Homemade lasagna, chicken francaise, and linguine.
+                  </div>
+                </li>
+                <li>
+                  <span class="feat-icon">🍦</span>
+                  <div>
+                    <strong>Walk-Up Dairy Bar:</strong> Famous chocolate-vanilla twists and premium milkshakes.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Stats stats={stats} columns={4} />
+
+    <FeatureGrid eyebrow="What We Serve Best" heading="Diner Favorites Handcrafted Daily" features={features} />
+
+    <Testimonials testimonials={testimonials} />
+
+    <FAQ faqs={faqs} />
+
+    <CTABanner 
+      heading="Hungry? Give Us a Call!" 
+      description="All of our menu items are cooked to order and packaged fresh for hot, quick takeout. Bring home a true local favorite tonight."
+      primaryCta={{ label: "Call (570) 282-6750", href: "tel:5702826750" }}
+    />
+  </BaseLayout>
+)}
+
+<style>
+  .text-center { text-align: center; }
+  .text-dark { color: var(--color-text); }
+  
+  .eyebrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* Heritage Section */
+  .heritage-section {
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  @media (min-width: 880px) {
+    .heritage-grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+  .heritage-content h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+  }
+  .heritage-content p {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-muted);
+  }
+  .quick-callout {
+    background: var(--color-bg);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-primary);
+    margin-top: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+  .quick-callout p {
+    margin-bottom: 0;
+    color: var(--color-text);
+    font-size: var(--text-sm);
+  }
+
+  .heritage-visual {
+    display: flex;
+    justify-content: center;
+  }
+  .heritage-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 440px;
+  }
+  .heritage-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    border-bottom: 2px solid var(--color-primary-light);
+    padding-bottom: var(--space-2);
+  }
+  .diner-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .diner-features li {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+  .feat-icon {
+    font-size: var(--text-2xl);
+    line-height: 1;
+  }
+  .diner-features div {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .diner-features strong {
+    display: block;
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+</style>

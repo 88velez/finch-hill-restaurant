@@ -1,0 +1,406 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site.config";
+
+const categories = [
+  {
+    id: "breakfast",
+    name: "Breakfast Staples",
+    time: "Served 7:00 AM – 11:30 AM",
+    items: [
+      {
+        name: "Finch Hill Breakfast Special",
+        price: "$6.50",
+        description: "Two farm-fresh eggs any style, crispy home fries, toast, and your choice of applewood smoked bacon, sausage, or ham.",
+      },
+      {
+        name: "The Crossroads Pancake Stack",
+        price: "$5.75",
+        description: "Three massive, fluffy golden buttermilk pancakes made from our secret family recipe, served with butter and warm syrup.",
+      },
+      {
+        name: "Greenfield Sunrise Omelet",
+        price: "$7.25",
+        description: "Three-egg omelet loaded with bell peppers, sweet onions, smoked ham, and melted sharp cheddar cheese, served with home fries.",
+      },
+      {
+        name: "Finch Hill Burger on Grilled Cheese",
+        price: "$8.50",
+        description: "A legendary local favorite: our juicy, hand-pressed diner beef patty sandwiched between two gooey, golden-grilled cheese sandwiches.",
+      },
+      {
+        name: "Dundaff Toast & Eggs",
+        price: "$4.50",
+        description: "Two farm-fresh eggs cooked to order, served with thick-sliced buttered sourdough or rye toast.",
+      }
+    ]
+  },
+  {
+    id: "comforts",
+    name: "Diner Comfort Classics",
+    time: "Available All Day",
+    items: [
+      {
+        name: "Famous Home-Breaded Chicken Tenders",
+        price: "$9.95",
+        description: "A customer favorite! Four extra-large, hand-cut chicken breast tenders, double-breaded in-house for maximum crunch. Served with golden fries and homemade honey mustard.",
+        featured: true,
+      },
+      {
+        name: "Billy's Fried Fish Special",
+        price: "$11.50",
+        description: "Two thick, generous Atlantic cod filets, hand-breaded and fried to crisp, golden-brown perfection. Served with fresh-cut fries, coleslaw, and homemade tartar sauce.",
+        featured: true,
+      },
+      {
+        name: "The Classic Route 247 Burger",
+        price: "$7.50",
+        description: "A half-pound hand-pressed beef patty grilled to order on a toasted brioche bun with lettuce, tomato, pickles, and our signature diner sauce.",
+      },
+      {
+        name: "Greenfield Hot Wiener Platter",
+        price: "$6.95",
+        description: "Two all-beef wieners served in toasted buns and smothered in our famous, decades-old family secret spicy beef wiener sauce.",
+      }
+    ]
+  },
+  {
+    id: "italian",
+    name: "Italian Favorites",
+    time: "Served Daily Starting at 4:00 PM",
+    items: [
+      {
+        name: "Linguine with Hand-Rolled Meatballs",
+        price: "$12.95",
+        description: "A mountain-sized platter of hot, tender linguine tossed in our rich, slow-simmered family marinara sauce, topped with two massive hand-rolled Italian meatballs, shaved parmesan, and fresh herbs.",
+        featured: true,
+      },
+      {
+        name: "Chicken Francaise",
+        price: "$14.50",
+        description: "Repeatedly reviewed as 'out of this world tender'! Pan-seared egg-battered chicken breasts in a velvety white wine, lemon, and butter reduction, served over a bed of angel hair pasta.",
+        featured: true,
+      },
+      {
+        name: "Classic Pasta Marinara",
+        price: "$9.50",
+        description: "A traditional favorite of simple elegance: linguine or penne pasta tossed in our sweet, garlic-infused marinara sauce and served with a crisp garden tossed salad.",
+      }
+    ]
+  },
+  {
+    id: "dairy",
+    name: "Famous Summer Dairy Bar",
+    time: "Seasonal Ice Cream Counter",
+    items: [
+      {
+        name: "Finch Hill Classic Twist",
+        price: "$3.50",
+        description: "Our legendary, perfectly swirled chocolate and vanilla soft-serve, served high in a crispy wafer or waffle cone.",
+      },
+      {
+        name: "Gourmet Thick Milkshake",
+        price: "$4.95",
+        description: "Old-fashioned, hand-spun milkshake made with premium hard-serve ice cream. Our local favorite Coffee Milkshake is highly recommended!",
+        featured: true,
+      },
+      {
+        name: "The Reese's Pieces Avalanche",
+        price: "$5.50",
+        description: "Rich, creamy vanilla soft-serve blended with premium crushed Reese's Pieces and peanut butter drizzle.",
+      },
+      {
+        name: "Hard-Serve Scoops",
+        price: "$3.95",
+        description: "Choose from our rotating selection of 12 premium homemade hard ice cream flavors, including Butter Pecan, Mint Choc Chip, and Rocky Road.",
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title="Our Menu" description="Explore the full menu at Finch Hill Restaurant & Dairy Bar — from our famous home-breaded chicken tenders and fresh-cut fries to hot Italian dinners and sweet summer ice cream twists.">
+  <section class="menu-hero section-alt">
+    <div class="container text-center">
+      <p class="eyebrow anim-fade-in visible">Always Homemade & Hearty</p>
+      <h1 class="anim-fade-in visible" id="menu-title">Our Menu</h1>
+      <p class="lead anim-fade-in visible">
+        For over 30 years, we've believed in serving large portions of delicious comfort food at prices that keep our neighbors coming back.
+      </p>
+      
+      <div class="info-badges anim-fade-in visible">
+        <span class="badge-item alert-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12" y2="18"/>
+            <line x1="2" y1="10" x2="22" y2="10"/>
+          </svg>
+          <strong>CASH ONLY</strong>
+        </span>
+        <span class="badge-item info-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <strong>DINNER SERVICE:</strong> Separate Italian menu starts at 4:00 PM
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="menu-nav container" aria-label="Menu sections">
+    <ul>
+      {categories.map((cat) => (
+        <li>
+          <a href={`#${cat.id}`} class="menu-nav-link">
+            {cat.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <section class="menu-container section">
+    <div class="container">
+      {categories.map((cat) => (
+        <div class="menu-category" id={cat.id}>
+          <div class="category-header">
+            <h2>{cat.name}</h2>
+            <span class="category-time">{cat.time}</span>
+          </div>
+
+          <div class="menu-grid">
+            {cat.items.map((item) => (
+              <article class:list={["menu-card", { "menu-card-featured": item.featured }]}>
+                {item.featured && <span class="featured-badge">Local Favorite</span>}
+                <div class="menu-card-header">
+                  <h3>{item.name}</h3>
+                  <span class="menu-item-price">{item.price}</span>
+                </div>
+                <p class="menu-item-description">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="takeout-cta section-alt">
+    <div class="container text-center">
+      <h2>Craving Finch Hill at Home?</h2>
+      <p class="lead">All of our breakfast, lunch, dinner, and dairy bar items are available for fast, hot takeout!</p>
+      <div class="cta-actions">
+        <a href={`tel:${site.phone}`} class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Call (570) 282-6750
+        </a>
+        <a href="/contact" class="btn btn-outline btn-lg">View Hours & Map</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .menu-hero {
+    padding-block: clamp(var(--space-12), 8vw, var(--space-20));
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-3);
+  }
+  .menu-hero h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+  .lead {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    max-width: 65ch;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+  }
+
+  .info-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  .badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+  }
+  .alert-badge {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fee2e2;
+  }
+  .info-badge {
+    background: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fef3c7;
+  }
+
+  /* Menu Navigation Sticky Bar */
+  .menu-nav {
+    position: sticky;
+    top: 70px;
+    z-index: 50;
+    background: var(--color-bg);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-12);
+  }
+  .menu-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .menu-nav-link {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    transition: color var(--duration-fast) var(--ease-out);
+    padding-block: var(--space-1);
+    display: inline-block;
+  }
+  .menu-nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  /* Categories */
+  .menu-category {
+    margin-bottom: var(--space-16);
+    scroll-margin-top: 140px;
+  }
+  .category-header {
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-8);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .category-header h2 {
+    color: var(--color-primary);
+    font-size: var(--text-3xl);
+  }
+  .category-time {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Cards Grid */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  @media (min-width: 768px) {
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .menu-card {
+    padding: var(--space-6);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    position: relative;
+    transition: all var(--duration-base) var(--ease-out);
+    box-shadow: var(--shadow-sm);
+  }
+  .menu-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+  }
+  
+  .menu-card-featured {
+    border-left: 4px solid var(--color-accent);
+    background: #fffdf5;
+  }
+  .featured-badge {
+    position: absolute;
+    top: calc(-1 * var(--space-3));
+    left: var(--space-6);
+    background: var(--color-accent);
+    color: var(--color-text-inverse);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .menu-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+  .menu-card h3 {
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+  }
+  .menu-item-price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--color-accent-dark);
+    white-space: nowrap;
+  }
+  .menu-item-description {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+  }
+
+  /* Takeout CTA */
+  .takeout-cta {
+    padding-block: var(--space-16);
+    border-top: 1px solid var(--color-border);
+  }
+  .takeout-cta h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-4xl);
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .btn svg {
+    margin-right: var(--space-2);
+  }
+</style>

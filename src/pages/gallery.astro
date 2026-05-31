@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Gallery from "../components/Gallery.astro";
+
+const galleryItems = [
+  { 
+    src: "/images/finch_1.jpg", 
+    alt: "Finch Hill Restaurant Photo 1", 
+    title: "Photo 1", 
+    description: "Real photo from our crossroads restaurant.", 
+    category: "Finch Hill" 
+  },
+  { 
+    src: "/images/finch_4.jpg", 
+    alt: "Finch Hill Restaurant Photo 2", 
+    title: "Photo 2", 
+    description: "Real photo from our crossroads restaurant.", 
+    category: "Finch Hill" 
+  },
+  { 
+    src: "/images/finch_5.jpg", 
+    alt: "Finch Hill Restaurant Photo 3", 
+    title: "Photo 3", 
+    description: "Real photo from our crossroads restaurant.", 
+    category: "Finch Hill" 
+  }
+];
+---
+
+<BaseLayout title="Gallery" description="Browse real photos of our homemade diner comfort foods, Italian specialties, and summer dairy bar treats at Finch Hill.">
+  <Gallery
+    eyebrow="Our Real Story"
+    heading="Real Diner Gallery"
+    items={galleryItems}
+    columns={3}
+  />
+</BaseLayout>

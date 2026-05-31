@@ -1,0 +1,236 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { site } from "../data/site.config";
+---
+
+<BaseLayout
+  title="Contact & Hours"
+  description={`Find operating hours, location details, and contact information for ${site.name} along PA Route 247.`}
+>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info-block">
+          <p class="eyebrow">Visit Us or Call</p>
+          <h1>Come on Over</h1>
+          <p class="lead">We're located at the scenic crossroads of Route 247, the perfect stop on your way to Crystal Lake or Dundaff.</p>
+          
+          <div class="cash-alert">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12" y2="18"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <div>
+              <strong>Traditional Cash-Only Diner</strong>
+              <p>Please note that we do not accept credit or debit cards.</p>
+            </div>
+          </div>
+
+          <ul class="contact-info">
+            <li>
+              <strong>Phone Number</strong>
+              <a href={`tel:${site.phone.replace(/\D/g, "")}`} class="phone-link">{site.phoneDisplay}</a>
+            </li>
+            <li>
+              <strong>Address</strong>
+              <span class="address-text">
+                {site.address.street}<br />
+                {site.address.city}, {site.address.state} {site.address.zip}
+              </span>
+            </li>
+            <li>
+              <strong>Dine-In & Takeout Hours</strong>
+              <div class="hours-table">
+                <div class="hours-row">
+                  <span class="day">Monday</span>
+                  <span class="time">7:00 AM – 3:00 PM</span>
+                </div>
+                <div class="hours-row highlight-row">
+                  <span class="day">Tuesday – Saturday</span>
+                  <span class="time">7:00 AM – 8:00 PM</span>
+                </div>
+                <div class="hours-row highlight-row">
+                  <span class="day">Sunday</span>
+                  <span class="time">7:00 AM – 8:00 PM</span>
+                </div>
+                <p class="hours-footnote">* Italian Dinner Specialties served daily starting at 4:00 PM.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="contact-form-block">
+          <ContactForm heading="Send Us a Message" />
+          
+          <!-- Crossroad Roadmap Visual Placeholder -->
+          <div class="roadmap-block">
+            <h3>How to Find Us</h3>
+            <p>We sit right on <strong>PA Route 247</strong> at the gateway of the Endless Mountains. Look for the bright, classic Finch Hill Restaurant sign at the crossroads!</p>
+            <div class="roadmap-badge">
+              <span class="route-marker">PA-247</span>
+              <span>Between Carbondale & Crystal Lake</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: var(--space-12);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) {
+    .contact-grid { grid-template-columns: 1fr 1.2fr; }
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-3);
+  }
+  h1 { color: var(--color-primary); margin-bottom: var(--space-4); }
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    line-height: var(--leading-snug);
+  }
+
+  /* Cash Alert Banner */
+  .cash-alert {
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-left: 4px solid #b91c1c;
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    margin-bottom: var(--space-8);
+  }
+  .cash-alert svg {
+    color: #b91c1c;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cash-alert strong {
+    color: #991b1b;
+    font-size: var(--text-sm);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .cash-alert p {
+    color: #7f1d1d;
+    font-size: var(--text-xs);
+    margin-bottom: 0;
+  }
+
+  .contact-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .contact-info li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .contact-info strong {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-1);
+    margin-bottom: var(--space-1);
+  }
+  .phone-link {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .address-text {
+    color: var(--color-text);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  /* Hours Table style */
+  .hours-table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+  .highlight-row {
+    background: var(--color-bg-alt);
+    font-weight: 500;
+  }
+  .hours-footnote {
+    font-size: var(--text-xs);
+    color: var(--color-accent-dark);
+    font-style: italic;
+    margin-top: var(--space-2);
+  }
+
+  /* Form and Roadmap styling */
+  .contact-form-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .contact-form-block :global(.section) {
+    padding: 0 !important;
+  }
+  .roadmap-block {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+  .roadmap-block h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .roadmap-block p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+  .roadmap-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+  .route-marker {
+    background: var(--color-accent);
+    color: var(--color-text-inverse);
+    padding: 4px var(--space-3);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+  }
+</style>

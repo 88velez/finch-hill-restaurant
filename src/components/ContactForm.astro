@@ -1,0 +1,189 @@
+---
+/**
+ * Contact form.
+ * Submits to /api/contact (single path). With JS it posts JSON and shows an
+ * inline status; without JS it does a normal POST and the endpoint redirects
+ * back to /contact?sent=1. A hidden honeypot field is checked server-side.
+ */
+interface Props {
+  heading?: string;
+  subject?: string;
+}
+const { heading = "Get in touch", subject = "Website inquiry" } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-narrow">
+    {heading && <h2>{heading}</h2>}
+    <div class="form-status form-success" id="contact-sent" role="status" hidden>
+      Thanks! We'll be in touch soon.
+    </div>
+    <form
+      class="contact-form"
+      id="contact-form"
+      method="POST"
+      action="/api/contact"
+    >
+      <input type="hidden" name="subject" value={subject} />
+      <!-- Honeypot: hidden from real users; bots that fill it are rejected server-side. -->
+      <p class="hp" aria-hidden="true">
+        <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Name <span aria-hidden="true">*</span></label>
+          <input id="name" type="text" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" type="email" name="email" required autocomplete="email" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" type="tel" name="phone" autocomplete="tel" />
+      </div>
+
+      <div class="field">
+        <label for="service">How can we help you?</label>
+        <select id="service" name="service">
+          <option value="">Select an option…</option>
+          <option>General inquiry</option>
+          <option>Catering or event request</option>
+          <option>Share feedback or a memory</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Message <span aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <div class="form-status" id="form-status" aria-live="polite" hidden></div>
+
+      <button type="submit" class="btn btn-accent" id="form-submit-btn">Send message</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("form-status");
+    const submitBtn = document.getElementById("form-submit-btn");
+
+    // Show the success banner if we were redirected back from a no-JS submit.
+    if (new URLSearchParams(location.search).get("sent") === "1") {
+      const sent = document.getElementById("contact-sent");
+      if (sent) sent.hidden = false;
+    }
+
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      const formData = new FormData(form);
+      var data = {};
+      formData.forEach(function(value, key) {
+        data[key] = typeof value === "string" ? value : String(value);
+      });
+
+      try {
+        var res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        var result = await res.json();
+        if (result.success) {
+          status.hidden = false;
+          status.className = "form-status form-success";
+          status.textContent = "Thanks! We'll be in touch soon.";
+          form.reset();
+          setTimeout(function() { status.hidden = true; }, 5000);
+        } else if (result.error) {
+          status.hidden = false;
+          status.className = "form-status form-error";
+          status.textContent = result.error;
+        }
+      } catch (_err) {
+        status.hidden = false;
+        status.className = "form-status form-error";
+        status.textContent = "Something went wrong. Please try again or email us directly.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send message";
+      }
+    });
+  })();
+</script>
+
+<style>
+  h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-8);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 560px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+  .field { display: flex; flex-direction: column; gap: var(--space-2); }
+  label {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+  label span { color: var(--color-accent); }
+  input, select, textarea {
+    font-family: inherit;
+    font-size: var(--text-base);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
+  }
+  textarea { resize: vertical; }
+  .hp { position: absolute; left: -9999px; }
+  button[type="submit"] { align-self: flex-start; }
+
+  .form-status {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+  .form-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-success, #10b981);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+  .form-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-error, #ef4444);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+</style>
