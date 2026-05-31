@@ -116,6 +116,7 @@ const stats = [
           </div>
           <div class="heritage-visual">
             <div class="heritage-card">
+              <img src="/images/finch_hill_sign.png" alt="Finch Hill Restaurant & Dairy Bar Digital Sign" class="heritage-sign-img" />
               <h3>Dine-In & Takeout</h3>
               <ul class="diner-features">
                 <li>
@@ -229,6 +230,15 @@ const stats = [
     box-shadow: var(--shadow-lg);
     width: 100%;
     max-width: 440px;
+    display: flex;
+    flex-direction: column;
+  }
+  .heritage-sign-img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
   }
   .heritage-card h3 {
     color: var(--color-primary);

@@ -28,6 +28,7 @@
   --font-display: "Fraunces", Georgia, serif;          /* Headings — swap for brand personality */
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --font-sign: "Lobster", cursive, sans-serif;         /* Retro digital sign script font */
 
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
@@ -264,7 +265,12 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl)); }
+h1 {
+  font-family: var(--font-sign);
+  font-weight: 400;
+  letter-spacing: normal;
+  font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+}
 h2 { font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl)); }
 h3 { font-size: var(--text-2xl); }
 h4 { font-size: var(--text-xl); }
